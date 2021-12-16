@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "19759079-4e04-4024-abb5-d1bade77c019",
+		"name": "AES",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "127.0.0.1:8080/aes/encrypt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"plain_text\": \"Apple\",\r\n    \"aes_key\": \"404D635166546A576E5A723475377721\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/aes/encrypt",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"aes",
+						"encrypt"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200, normal",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plain_text\": \"Apple\",\r\n    \"aes_key\": \"404D635166546A576E5A723475377721\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/aes/encrypt",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"aes",
+								"encrypt"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Dec 2021 23:30:00 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"cipher_text\": \"C9E461E80EC3047944ACAE96A9896BC3\"\n}"
+				},
+				{
+					"name": "400, missing plain_text",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"aes_key\": \"404D635166546A576E5A723475377721\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/aes/encrypt",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"aes",
+								"encrypt"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Dec 2021 23:49:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"timestamp\": \"2021-12-15T23:49:56.055+00:00\",\n    \"status\": 400,\n    \"error\": \"Bad Request\",\n    \"message\": \"plain_text or aes_key is empty\",\n    \"path\": \"/aes/encrypt\"\n}"
+				},
+				{
+					"name": "500, key error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plain_text\": \"Apple\",\r\n    \"aes_key\": \"wrongKey\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/aes/encrypt",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"aes",
+								"encrypt"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Dec 2021 23:50:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"timestamp\": \"2021-12-15T23:50:21.448+00:00\",\n    \"status\": 500,\n    \"error\": \"Internal Server Error\",\n    \"message\": \"Invalid AES key length: 8 bytes\",\n    \"path\": \"/aes/encrypt\"\n}"
+				}
+			]
+		},
+		{
+			"name": "127.0.0.1:8080/aes/decrypt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cipher_text\": \"C9E461E80EC3047944ACAE96A9896BC3\",\r\n    \"aes_key\": \"404D635166546A576E5A723475377721\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/aes/decrypt",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"aes",
+						"decrypt"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200, normal",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cipher_text\": \"C9E461E80EC3047944ACAE96A9896BC3\",\r\n    \"aes_key\": \"404D635166546A576E5A723475377721\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/aes/decrypt",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"aes",
+								"decrypt"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Dec 2021 23:45:35 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"plain_text\": \"Apple\",\n    \"base64\": \"QXBwbGU=\"\n}"
+				},
+				{
+					"name": "400, missing aes_key",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cipher_text\": \"C9E461E80EC3047944ACAE96A9896BC3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/aes/decrypt",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"aes",
+								"decrypt"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Dec 2021 23:52:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"timestamp\": \"2021-12-15T23:52:59.535+00:00\",\n    \"status\": 400,\n    \"error\": \"Bad Request\",\n    \"message\": \"cipher_text or aes_key is empty\",\n    \"path\": \"/aes/decrypt\"\n}"
+				},
+				{
+					"name": "500, wrong cipher_text",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cipher_text\": \"wrongCipher\",\r\n    \"aes_key\": \"404D635166546A576E5A723475377721\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/aes/decrypt",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"aes",
+								"decrypt"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Dec 2021 23:52:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"timestamp\": \"2021-12-15T23:52:21.281+00:00\",\n    \"status\": 500,\n    \"error\": \"Internal Server Error\",\n    \"message\": \"Hex-encoded string must have an even number of characters\",\n    \"path\": \"/aes/decrypt\"\n}"
+				}
+			]
+		}
+	]
+}
