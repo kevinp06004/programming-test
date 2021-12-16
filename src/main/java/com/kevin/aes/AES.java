@@ -15,7 +15,7 @@ public class AES {
 
     private static Cipher initCipher(int mode, String key)
             throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-                
+
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), "AES");
         cipher.init(mode, secretKey);
@@ -35,7 +35,7 @@ public class AES {
             NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 
         Cipher cipher = initCipher(Cipher.DECRYPT_MODE, key);
-        return cipher.doFinal(Hex.decode(cipher_text));
+        return cipher.doFinal(Hex.decode(cipher_text)); // Input of the cipher_text should be Hex String
     }
 
 }
